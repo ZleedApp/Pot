@@ -1,0 +1,17 @@
+{
+  "error": {
+    "generic": {
+      "methodNotAllowed": "Method Not Allowed",
+      "notFound": "Route Not Found",
+      "internalServerError": "Internal Server Error",
+
+      "fieldMissing": "The `%0` field is required.",
+      "fieldTooShort": "The `%0` field must be at least %1 characters long."
+    },
+    "auth": {
+      "usernameTooShort": "Your username must containt atleast 3 alpanumeric characters!",
+      "usernameTooLong": "Your username can contain at most 32 characters!",
+      "invalidEmail": "Invalid email address!"
+    }
+  }
+}

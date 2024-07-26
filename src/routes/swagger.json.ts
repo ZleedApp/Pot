@@ -1,20 +1,17 @@
 import Method from '../enum/method';
+import Error from '../enum/error';
 
-import { ErrorRespone } from '../interfaces';
 import { Request, Response } from '../util/handler';
 
 import fs from 'fs';
 import path from 'path';
 
-export default function handler(
-  req: Request,
-  res: Response<unknown | ErrorRespone>
-) {
+export default function handler(req: Request, res: Response<any>) {
   if (req.method !== Method.GET)
-    return res.status(405).json({
-      error: 405,
-      message: 'Method Not Allowed'
-    });
+    return res.error(
+      Error.METHOD_NOT_ALLOWED,
+      'error.generic.methodNotAllowed'
+    );
 
   const swaggerData = fs.readFileSync(
     path.join(__dirname, '..', '..', 'data', 'swagger.json'),

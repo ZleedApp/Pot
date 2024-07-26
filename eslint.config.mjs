@@ -22,7 +22,6 @@ export default tseslint.config(
       indent: ['error', 2],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
-      'space-in-brackets': ['error', 'always'],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn'
     }

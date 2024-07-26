@@ -1,17 +1,15 @@
 import Method from '../enum/method';
+import Error from '../enum/error';
 
-import { IndexRespone, ErrorRespone, Version } from '../interfaces';
+import { IndexRespone, Version } from '../interfaces';
 import { Request, Response } from '../util/handler';
 
-export default function handler(
-  req: Request,
-  res: Response<IndexRespone | ErrorRespone>
-) {
+export default function handler(req: Request, res: Response<IndexRespone>) {
   if (req.method !== Method.GET)
-    return res.status(405).json({
-      error: 405,
-      message: 'Method Not Allowed'
-    });
+    return res.error(
+      Error.METHOD_NOT_ALLOWED,
+      'error.generic.methodNotAllowed'
+    );
 
   const versions: Version[] = [
     {

@@ -1,0 +1,17 @@
+{
+  "error": {
+    "generic": {
+      "methodNotAllowed": "A Metódus Nem Engedélyezett",
+      "notFound": "Nem Található",
+      "internalServerError": "Belső Szerverhiba",
+
+      "fieldMissing": "A(z) `%0` mező kötelező.",
+      "fieldTooShort": "A(z) `%0` mezőnek legálább %1 karakter hosszúnak kell lennie."
+    },
+    "auth": {
+      "usernameTooShort": "A felhasználónevednek legalább 3 alfanumerikus karaktert kell tartalmaznia!",
+      "usernameTooLong": "A felhasználóneved legfeljebb 32 karaktert tartalmazhat!",
+      "invalidEmail": "Érvénytelen e-mail cím!"
+    }
+  }
+}
