@@ -80,7 +80,8 @@ export default async function handler(
     const token = sign(
       {
         id: uid,
-        email: email
+        email: email,
+        username: safeUsername
       },
       process.env.JWT_SECRET!,
       { expiresIn: '30d' }
@@ -119,7 +120,7 @@ export default async function handler(
 
     return res.error(
       Error.INTERNAL_SERVER_ERROR,
-      `error.generic.internalServerError`
+      'error.generic.internalServerError'
     );
   }
 }

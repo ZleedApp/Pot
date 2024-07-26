@@ -4,7 +4,7 @@ export interface UserRespose {
 }
 
 export interface User {
-  id: BigInt;
+  id: bigint;
   username: string;
   displayName: string;
   email: string;
@@ -20,13 +20,13 @@ export interface User {
 }
 
 export interface StreamKey {
-  id: BigInt;
+  id: bigint;
   key: string;
   created_at: Date;
 }
 
 export interface Connection {
-  id: BigInt;
+  id: bigint;
   url: string;
   created_at: Date;
 }
