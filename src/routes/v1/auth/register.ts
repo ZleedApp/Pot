@@ -67,7 +67,7 @@ export default async function handler(
     return res.error(Status.BAD_REQUEST, 'error.auth.invalidEmail');
 
   const saltedPassword = await bcrypt.hash(password, saltRounds);
-  const uid = snowflake.getUniqueID();
+  const uid = snowflake.getUniqueID() as bigint;
 
   const userDocument = new User({
     id: uid,

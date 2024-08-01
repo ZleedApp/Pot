@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 
 import Logger from './util/logger';
 import pathParser from './util/path_parser';
+import version from './util/version';
+
 import { Request, Response } from './util/handler';
 
 import fs from 'fs';
@@ -21,7 +23,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, '..', 'data', 'static')));
+
 app.use((req, res, next) => {
+  res.setHeader('X-Powered-By', `Pot/${version}`);
+
   next();
 
   webLogger.info(
@@ -60,7 +66,16 @@ const exploreRoutes = (dir: string) => {
     logger.info('+', `\`${routePath}\``);
 
     app.all(routePath, (req, res) => {
-      routeHandler.default(new Request(req), new Response(res));
+      try {
+        routeHandler.default(new Request(req), new Response(res));
+      } catch (err: any) {
+        logger.error(err.message);
+
+        res.status(500).json({
+          error: 500,
+          message: 'error.generic.internalServerError'
+        });
+      }
     });
   }
 

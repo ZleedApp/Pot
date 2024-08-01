@@ -47,7 +47,7 @@ export class Response<T> {
         this.res.status(code).json(data);
       },
       send: (data?: T) => {
-        this.res.status(code).send(data);
+        this.res.type('txt').status(code).send(data);
       }
     };
   }
