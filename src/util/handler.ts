@@ -21,11 +21,11 @@ export class Request {
     this.params = req.params;
   }
 
-  getHeader(key: string): string {
+  getHeader(key: string): string | undefined {
     return this.headers[key.toLowerCase()];
   }
 
-  getParam(key: string) {
+  getParam(key: string): string | number | undefined {
     return this.params[key.toLowerCase()];
   }
 }
