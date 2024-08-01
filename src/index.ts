@@ -24,6 +24,7 @@ const PORT = parseInt(process.env.PORT!) || 3000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(rateLimiter);
 
 app.use(express.static(path.join(__dirname, '..', 'data', 'static')));
 
@@ -36,8 +37,6 @@ app.use((req, res, next) => {
     `${req.ip} "${req.method} ${req.path} HTTP/${req.httpVersion}" ${res.statusCode} ${res.get('Content-Length') ? res.get('Content-Length') : '0'} "${req.get('Referer') ? req.get('Referer') : '-'}" "${req.get('User-Agent')}"`
   );
 });
-
-app.use(rateLimiter);
 
 (async () => {
   const startTimestamp = Date.now();
