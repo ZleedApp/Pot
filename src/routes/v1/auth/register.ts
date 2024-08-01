@@ -1,4 +1,4 @@
-import Error from '../../../enum/error';
+import Status from '../../../enum/status';
 import Method from '../../../enum/method';
 
 import snowflake from '../../../util/snowflake';
@@ -24,7 +24,7 @@ export default async function handler(
 ) {
   if (req.method !== Method.POST)
     return res.error(
-      Error.METHOD_NOT_ALLOWED,
+      Status.METHOD_NOT_ALLOWED,
       'error.generic.methodNotAllowed'
     );
 
@@ -32,20 +32,23 @@ export default async function handler(
 
   if (!username)
     return res.error(
-      Error.BAD_REQUEST,
+      Status.BAD_REQUEST,
       'error.generic.fieldMissing;("username")'
     );
   if (!email)
-    return res.error(Error.BAD_REQUEST, 'error.generic.fieldMissing;("email")');
+    return res.error(
+      Status.BAD_REQUEST,
+      'error.generic.fieldMissing;("email")'
+    );
   if (!password)
     return res.error(
-      Error.BAD_REQUEST,
+      Status.BAD_REQUEST,
       'error.generic.fieldMissing;("password")'
     );
 
   if (username.length < 3)
     return res.error(
-      Error.BAD_REQUEST,
+      Status.BAD_REQUEST,
       'error.generic.fieldTooShort;("username", 3)'
     );
 
@@ -56,12 +59,12 @@ export default async function handler(
     .replace(' ', '_');
 
   if (safeUsername.length < 3)
-    return res.error(Error.BAD_REQUEST, 'error.auth.usernameTooShort');
+    return res.error(Status.BAD_REQUEST, 'error.auth.usernameTooShort');
   if (safeUsername.length > 32)
-    return res.error(Error.BAD_REQUEST, 'error.auth.usernameTooLong');
+    return res.error(Status.BAD_REQUEST, 'error.auth.usernameTooLong');
 
   if (!isValidEmail(email))
-    return res.error(Error.BAD_REQUEST, 'error.auth.invalidEmail');
+    return res.error(Status.BAD_REQUEST, 'error.auth.invalidEmail');
 
   const saltedPassword = await bcrypt.hash(password, saltRounds);
   const uid = snowflake.getUniqueID();
@@ -87,7 +90,7 @@ export default async function handler(
       { expiresIn: '30d' }
     );
 
-    return res.status(200).json({
+    return res.status(Status.OK).json({
       jwt: token,
       user: {
         id: uid,
@@ -110,16 +113,16 @@ export default async function handler(
 
     if (e.code === 11000) {
       if (e.keyPattern.email === 1) {
-        return res.error(Error.BAD_REQUEST, 'error.auth.emailAlreadyInUse');
+        return res.error(Status.BAD_REQUEST, 'error.auth.emailAlreadyInUse');
       }
 
       if (e.keyPattern.username === 1) {
-        return res.error(Error.BAD_REQUEST, 'error.auth.usernameAlreadyInUse');
+        return res.error(Status.BAD_REQUEST, 'error.auth.usernameAlreadyInUse');
       }
     }
 
     return res.error(
-      Error.INTERNAL_SERVER_ERROR,
+      Status.INTERNAL_SERVER_ERROR,
       'error.generic.internalServerError'
     );
   }

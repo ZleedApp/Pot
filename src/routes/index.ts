@@ -1,5 +1,5 @@
 import Method from '../enum/method';
-import Error from '../enum/error';
+import Status from '../enum/status';
 
 import { IndexRespone, Version } from '../interfaces';
 import { Request, Response } from '../util/handler';
@@ -7,7 +7,7 @@ import { Request, Response } from '../util/handler';
 export default function handler(req: Request, res: Response<IndexRespone>) {
   if (req.method !== Method.GET)
     return res.error(
-      Error.METHOD_NOT_ALLOWED,
+      Status.METHOD_NOT_ALLOWED,
       'error.generic.methodNotAllowed'
     );
 
@@ -23,7 +23,7 @@ export default function handler(req: Request, res: Response<IndexRespone>) {
     }
   ];
 
-  return res.status(200).json({
+  return res.status(Status.OK).json({
     latest: versions.length - 1,
     swagger: '/swagger.json',
     versions

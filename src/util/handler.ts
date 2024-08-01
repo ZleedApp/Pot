@@ -1,4 +1,4 @@
-import Error from '../enum/error';
+import Status from '../enum/status';
 import Method from '../enum/method';
 
 export class Request {
@@ -41,7 +41,7 @@ export class Response<T> {
     this.res = res;
   }
 
-  public status(code: number) {
+  public status(code: Status) {
     return {
       json: (data?: T) => {
         this.res.status(code).json(data);
@@ -52,7 +52,7 @@ export class Response<T> {
     };
   }
 
-  public error(code: Error, message: string) {
+  public error(code: Status, message: string) {
     return this.res.status(code).json({
       error: code,
       message

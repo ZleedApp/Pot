@@ -1,4 +1,4 @@
-import Error from '../../../enum/error';
+import Status from '../../../enum/status';
 import Method from '../../../enum/method';
 
 import snowflake from '../../../util/snowflake';
@@ -24,32 +24,35 @@ export default async function handler(
 ) {
   if (req.method !== Method.POST)
     return res.error(
-      Error.METHOD_NOT_ALLOWED,
+      Status.METHOD_NOT_ALLOWED,
       'error.generic.methodNotAllowed'
     );
 
   const { email, password } = req.body;
 
   if (!email)
-    return res.error(Error.BAD_REQUEST, 'error.generic.fieldMissing;("email")');
+    return res.error(
+      Status.BAD_REQUEST,
+      'error.generic.fieldMissing;("email")'
+    );
   if (!password)
     return res.error(
-      Error.BAD_REQUEST,
+      Status.BAD_REQUEST,
       'error.generic.fieldMissing;("password")'
     );
 
   if (!isValidEmail(email))
-    return res.error(Error.BAD_REQUEST, 'error.auth.invalidEmail');
+    return res.error(Status.BAD_REQUEST, 'error.auth.invalidEmail');
 
   try {
     const user = await User.findOne({ email });
 
-    if (!user) return res.error(Error.NOT_FOUND, 'error.auth.userNotFound');
+    if (!user) return res.error(Status.NOT_FOUND, 'error.auth.userNotFound');
 
     const match = await bcrypt.compare(password, user.password);
 
     if (!match)
-      return res.error(Error.UNAUTHORIZED, 'error.auth.invalidPassword');
+      return res.error(Status.UNAUTHORIZED, 'error.auth.invalidPassword');
 
     const token = sign(
       {
@@ -61,7 +64,7 @@ export default async function handler(
       { expiresIn: '30d' }
     );
 
-    return res.status(200).json({
+    return res.status(Status.OK).json({
       jwt: token,
       user: {
         id: user.id,
@@ -89,7 +92,7 @@ export default async function handler(
     });
   } catch (e: any) {
     return res.error(
-      Error.INTERNAL_SERVER_ERROR,
+      Status.INTERNAL_SERVER_ERROR,
       'error.generic.internalServerError'
     );
   }

@@ -1,5 +1,5 @@
 import Method from '../enum/method';
-import Error from '../enum/error';
+import Status from '../enum/status';
 
 import { Request, Response } from '../util/handler';
 
@@ -9,7 +9,7 @@ import path from 'path';
 export default function handler(req: Request, res: Response<any>) {
   if (req.method !== Method.GET)
     return res.error(
-      Error.METHOD_NOT_ALLOWED,
+      Status.METHOD_NOT_ALLOWED,
       'error.generic.methodNotAllowed'
     );
 
@@ -18,5 +18,5 @@ export default function handler(req: Request, res: Response<any>) {
     'utf8'
   );
 
-  return res.status(200).json(JSON.parse(swaggerData));
+  return res.status(Status.OK).json(JSON.parse(swaggerData));
 }

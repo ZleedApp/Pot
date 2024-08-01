@@ -1,5 +1,5 @@
 import Method from '../../enum/method';
-import Error from '../../enum/error';
+import Status from '../../enum/status';
 
 import { Request, Response } from '../../util/handler';
 
@@ -11,7 +11,7 @@ import crypto from 'crypto';
 export default function handler(req: Request, res: Response<any>) {
   if (req.method !== Method.GET)
     return res.error(
-      Error.METHOD_NOT_ALLOWED,
+      Status.METHOD_NOT_ALLOWED,
       'error.generic.methodNotAllowed'
     );
 
@@ -38,8 +38,8 @@ export default function handler(req: Request, res: Response<any>) {
 
     req.getHeader('If-None-Match') === `"${sum}"` && res.status(304).send();
 
-    return res.status(200).json(swaggerData);
+    return res.status(Status.OK).json(swaggerData);
   } else {
-    return res.error(Error.NOT_FOUND, 'error.generic.notFound');
+    return res.error(Status.NOT_FOUND, 'error.generic.notFound');
   }
 }
