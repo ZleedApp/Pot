@@ -3,12 +3,14 @@ import Status from '../../enum/status';
 
 import { Request, Response } from '../../util/handler';
 
+import { Langauge } from '../../interfaces';
+
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
 // for the error response codes so front-end devs don't need to get extra translations.
-export default function handler(req: Request, res: Response<any>) {
+export default function handler(req: Request, res: Response<Langauge>) {
   if (req.method !== Method.GET)
     return res.error(
       Status.METHOD_NOT_ALLOWED,

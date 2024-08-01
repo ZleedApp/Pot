@@ -12,6 +12,7 @@ import { Request, Response } from './util/handler';
 import fs from 'fs';
 import path from 'path';
 import getRoutes from './util/get_routes';
+import rateLimiter from './util/ratelimit';
 
 const app = express();
 
@@ -35,6 +36,8 @@ app.use((req, res, next) => {
     `${req.ip} "${req.method} ${req.path} HTTP/${req.httpVersion}" ${res.statusCode} ${res.get('Content-Length') ? res.get('Content-Length') : '0'} "${req.get('Referer') ? req.get('Referer') : '-'}" "${req.get('User-Agent')}"`
   );
 });
+
+app.use(rateLimiter);
 
 (async () => {
   const startTimestamp = Date.now();

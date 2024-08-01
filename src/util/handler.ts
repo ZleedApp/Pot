@@ -5,7 +5,7 @@ export class Request {
   public method: Method;
   public headers: { [key: string]: string };
   public body: { [key: string]: any };
-  public params: { [key: string]: any };
+  public params: { [key: string]: string | number };
 
   /**
    * Implement a method instead of using this!
