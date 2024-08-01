@@ -3,7 +3,7 @@ import Method from '../enum/method';
 
 export class Request {
   public method: Method;
-  public headers: { [key: string]: any };
+  public headers: { [key: string]: string };
   public body: { [key: string]: any };
   public params: { [key: string]: any };
 
@@ -21,12 +21,12 @@ export class Request {
     this.params = req.params;
   }
 
-  getHeader(key: string) {
-    return this.headers[key];
+  getHeader(key: string): string {
+    return this.headers[key.toLowerCase()];
   }
 
   getParam(key: string) {
-    return this.params[key];
+    return this.params[key.toLowerCase()];
   }
 }
 

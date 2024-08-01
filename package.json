@@ -9,6 +9,7 @@
     "dev": "nodemon -r dotenv/config src/index.ts",
     "lint": "eslint",
     "fix": "eslint --fix",
+    "swagger": "ts-node -r dotenv/config src/swagger/generate.ts",
     "prepare": "husky"
   },
   "keywords": [],

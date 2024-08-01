@@ -11,6 +11,7 @@ import { Request, Response } from './util/handler';
 
 import fs from 'fs';
 import path from 'path';
+import getRoutes from './util/get_routes';
 
 const app = express();
 
@@ -35,27 +36,12 @@ app.use((req, res, next) => {
   );
 });
 
-const routes: string[] = [];
-
-const exploreRoutes = (dir: string) => {
-  const iRoutes = fs.readdirSync(dir);
-
-  for (const route of iRoutes) {
-    if (fs.lstatSync(path.join(dir, route)).isDirectory())
-      exploreRoutes(path.join(dir, route));
-    else {
-      if (route.endsWith('.ts')) {
-        routes.push(path.join(dir, route));
-      }
-    }
-  }
-};
-
 (async () => {
   const startTimestamp = Date.now();
 
   await mongoose.connect(process.env.MONGO_URI!);
-  await exploreRoutes(path.join(__dirname, 'routes'));
+
+  const routes: string[] = await getRoutes(path.join(__dirname, 'routes'));
 
   for (const route of routes) {
     const routePath = pathParser(

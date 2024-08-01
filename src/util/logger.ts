@@ -7,7 +7,7 @@ export default class Logger {
     this.type = type;
   }
 
-  info(...message: any[]) {
+  info(...message: unknown[]) {
     const time = new Date().toISOString();
 
     console.log(
@@ -16,7 +16,7 @@ export default class Logger {
     );
   }
 
-  error(...message: any[]) {
+  error(...message: unknown[]) {
     const time = new Date().toISOString();
 
     console.log(
