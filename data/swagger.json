@@ -1,3 +1,97 @@
 {
-  "openapi": "3.0.3"
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Zleed API",
+    "description": "A free and open-source streaming platform.",
+    "termsOfService": " https://zleed.tv/legal/tos",
+    "contact": {
+      "name": "Zleed",
+      "url": "https://zleed.tv",
+      "email": "info@zleed.tv"
+    },
+    "license": {
+      "name": "GNU Affero General Public License v3.0",
+      "url": "https://github.com/ZleedApp/Pot/blob/main/LICENSE"
+    },
+    "version": "v0.0.1-dev"
+  },
+  "servers": [
+    {
+      "url": "https://api.zleed.tv",
+      "description": "Production Server"
+    },
+    {
+      "url": "https://api-staging.zleed.tv",
+      "description": "Staging Server"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Information about the api.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Index"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Index": {
+        "type": "object",
+        "properties": {
+          "latest": {
+            "type": "integer"
+          },
+          "swagger": {
+            "type": "string"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Version"
+            }
+          }
+        }
+      },
+      "Version": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "code": {
+                "type": "integer"
+              }
+            }
+          },
+          "path": {
+            "type": "string"
+          },
+          "changelog": {
+            "type": "string"
+          },
+          "deprecated": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
 }
