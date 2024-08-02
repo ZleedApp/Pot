@@ -3,16 +3,15 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
-import Logger from './util/logger';
-import pathParser from './util/path_parser';
-import version from './util/version';
+import Logger from '@/util/logger';
+import pathParser from '@/util/path_parser';
+import version from '@/util/version';
 
-import { Request, Response } from './util/handler';
+import { Request, Response } from '@/util/handler';
 
-import fs from 'fs';
 import path from 'path';
-import getRoutes from './util/get_routes';
-import rateLimiter from './util/ratelimit';
+import getRoutes from '@/util/get_routes';
+import rateLimiter from '@/util/ratelimit';
 
 const app = express();
 

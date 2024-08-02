@@ -1,5 +1,5 @@
-import Status from '../enum/status';
-import Method from '../enum/method';
+import Status from '@/enum/status';
+import Method from '@/enum/method';
 
 interface OpenApi {
   paths: PathSpec;

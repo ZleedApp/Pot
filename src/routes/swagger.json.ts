@@ -1,7 +1,7 @@
-import Method from '../enum/method';
-import Status from '../enum/status';
+import Method from '@/enum/method';
+import Status from '@/enum/status';
 
-import { Request, Response } from '../util/handler';
+import { Request, Response } from '@/util/handler';
 
 import fs from 'fs';
 import path from 'path';

@@ -1,18 +1,18 @@
-import Method from '../../enum/method';
-import Status from '../../enum/status';
+import Method from '@/enum/method';
+import Status from '@/enum/status';
 
 import {
   OpenApiBuilder,
   OpenApiMethod,
   OpenApiResponse
-} from '../../util/openapi_builder';
+} from '@/util/openapi_builder';
 
-import { Request, Response } from '../../util/handler';
+import { Request, Response } from '@/util/handler';
 
 import fs from 'fs';
 import path from 'path';
 
-import type { OpenApi } from '../../util/openapi_builder';
+import type { OpenApi } from '@/util/openapi_builder';
 
 export const openapi = (): OpenApi => {
   return new OpenApiBuilder()

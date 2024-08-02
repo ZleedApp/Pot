@@ -1,14 +1,14 @@
-import Status from '../../../enum/status';
-import Method from '../../../enum/method';
+import Status from '@/enum/status';
+import Method from '@/enum/method';
 
-import snowflake from '../../../util/snowflake';
+import snowflake from '@/util/snowflake';
 
-import Logger from '../../../util/logger';
+import Logger from '@/util/logger';
 
-import { Request, Response } from '../../../util/handler';
-import { UserRespose } from '../../../interfaces/user';
-import { isValidEmail } from '../../../util/validators';
-import { User } from '../../../models';
+import { Request, Response } from '@/util/handler';
+import { UserRespose } from '@/interfaces/user';
+import { isValidEmail } from '@/util/validators';
+import { User } from '@/models';
 
 import { sign } from 'jsonwebtoken';
 

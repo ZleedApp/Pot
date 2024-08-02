@@ -1,8 +1,8 @@
-import Method from '../../../enum/method';
-import Status from '../../../enum/status';
+import Method from '@/enum/method';
+import Status from '@/enum/status';
 
-import { Request, Response } from '../../../util/handler';
-import { User } from '../../../interfaces/user';
+import { Request, Response } from '@/util/handler';
+import { User } from '@/interfaces/user';
 
 import { verify } from 'jsonwebtoken';
 
@@ -10,11 +10,11 @@ import {
   OpenApiBuilder,
   OpenApiMethod,
   OpenApiResponse
-} from '../../../util/openapi_builder';
+} from '@/util/openapi_builder';
 
-import Database from '../../../util/database';
+import Database from '@/util/database';
 
-import type { OpenApi } from '../../../util/openapi_builder';
+import type { OpenApi } from '@/util/openapi_builder';
 
 interface ZleedJWT {
   id: bigint;

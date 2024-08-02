@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 
-import Status from '../enum/status';
+import Status from '@/enum/status';
 
 import type { Request, Response, NextFunction } from 'express';
 

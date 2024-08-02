@@ -1,4 +1,4 @@
-import { User } from '../models';
+import { User } from '@/models';
 
 class Database {
   static async getUser(
